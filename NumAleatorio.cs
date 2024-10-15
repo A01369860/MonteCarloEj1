@@ -36,7 +36,7 @@ namespace MonteCarloEj1
     {
         public NumExperimento() { }
 
-        public double SimularMonteCarlo(int idExp, int numPanel)
+        public double SimMC(int idExp, int numPanel)
         {
             NumAleatorio generador = new NumAleatorio();
             List<double> resultados = new List<double>();

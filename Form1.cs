@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace MonteCarloEj1
@@ -34,17 +35,10 @@ namespace MonteCarloEj1
             int NumPanel = Convert.ToInt32(textBox2.Text);
 
             // Paso 2: Llamar algoritmo
-            NumAleatorio exp = new NumAleatorio();
             NumExperimento generador1 = new NumExperimento();
 
             // Paso 3
-            List<Class1> listaOrigen = exp.CrearListaOrigen(NumPanel);
-            List<Class1> listaSalida = generador1.CrearColumnas(IdExp, listaOrigen);
-            // Paso 4
-            llenarGrid(listaSalida);
-
-   
-            double vidaUtilEsperada = experimento.SimularMonteCarlo(idExp, numPanel);
+            double vidaUtilEsperada = generador1.SimMC(IdExp, NumPanel);
 
             // Mostrar el resultado en el formulario
             MessageBox.Show($"La vida útil esperada del satélite es: {vidaUtilEsperada:F2} horas");
@@ -59,15 +53,12 @@ namespace MonteCarloEj1
             // Paso 1: Determinas la cantidad de columnas
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add(numeroColumna1, "Id");
-            dataGridView1.Columns.Add(numeroColumna2, "Latitud");
 
             // Paso 2: Recorres el grid para cada fila y llenar de valores aleatorios
             for (int i = 0; i < lista.Count; i++)
             {
                 dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna1) - 1].Value = (lista[i].IdPunto).ToString();
-                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna2) - 1].Value = lista[i].Latitud.ToString();
-                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna3) - 1].Value = lista[i].Longitud.ToString();
+                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna1) - 1].Value = (lista[i].IdExp).ToString();
             }
 
         }
