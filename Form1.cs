@@ -46,20 +46,24 @@ namespace MonteCarloEj1
 
         public void llenarGrid(List<Class1> lista)
         {
-            // Paso 0: Indicas el numero de columnas
-            string numeroColumna1 = "1";
-            string numeroColumna2 = "2";
-
-            // Paso 1: Determinas la cantidad de columnas
-            dataGridView1.Columns.Clear();
-            dataGridView1.Columns.Add(numeroColumna1, "Id");
-
-            // Paso 2: Recorres el grid para cada fila y llenar de valores aleatorios
-            for (int i = 0; i < lista.Count; i++)
+            // Llenar el DataGridView con los resultados de cada experimento
+            foreach (var resultado in resultado)
             {
-                dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells[Int32.Parse(numeroColumna1) - 1].Value = (lista[i].IdExp).ToString();
+                var fila = new DataGridViewRow();
+                fila.CreateCells(dataGridView1);
+
+                // Llenar las celdas con los tiempos de vida útil de los paneles
+                for (int i = 0; i < resultado.paneles.Count; i++)
+                {
+                    fila.Cells[i].Value = resultado.paneles[i];
+                }
+
+                // Llenar la última celda con el tiempo de fallo
+                fila.Cells[resultado.paneles.Count].Value = resultado.tiempoFallo;
+
+                dataGridView1.Rows.Add(fila);
             }
+
 
         }
 
